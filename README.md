@@ -57,6 +57,64 @@ Production (one server, one port): `npm run prod`, then open http://localhost:30
 
 ---
 
+## Deployment
+
+**1. Requirements.** Node.js 18+ (tested on 22) on any Linux, macOS or Windows host. No database server is needed: SQLite is created automatically in `data/`.
+
+**2. Configure** `.env` (copy from `.env.example`):
+
+| Variable | Purpose |
+| --- | --- |
+| `ANTHROPIC_API_KEY` | Optional. Enables the Claude agent; without it the offline demo planner is used |
+| `ANTHROPIC_MODEL` | Optional, default `claude-sonnet-5-5` |
+| `PORT` | HTTP port, default `3001` |
+| `JWT_SECRET` | Session signing secret, at least 32 random characters (recommended in production) |
+| `DB_PATH` / `DATABASE_URL` | SQLite file path, or a PostgreSQL URL (`postgres://user:pass@host:5432/db`, then `npm install pg pg-hstore`) |
+| `NODE_ENV` | Set to `production` so the session cookie is sent over HTTPS only |
+
+**3. Build and start** (frontend and API served together on one port):
+
+```bash
+npm ci            # or npm install
+npm run build
+NODE_ENV=production npm start      # Windows PowerShell: $env:NODE_ENV="production"; npm start
+```
+
+**4. Put it behind HTTPS.** Run it behind a reverse proxy (nginx, Caddy) or a platform that terminates TLS (Render, Railway, Fly.io, a VM). The server trusts `X-Forwarded-*` headers from the local proxy only. Keep it running with a process manager such as `pm2 start server/index.js --name studentfin`.
+
+**5. Keep secrets out of git.** `.env` and `data/` are listed in `.gitignore`; never commit the API key or the database.
+
+---
+
+## Tests
+
+```bash
+npm test
+```
+
+36 automated test cases, built on Node's built-in test runner (no extra dependencies):
+
+- `tests/unit.test.js` — 16 unit tests for the transfer cost model, scam detector, study planner, currency conversion and the agent's permission tiers (propose-only write tools, per-action limit, kill switch, 3-proposal cap, unknown tools).
+- `tests/api.test.js` — 20 end-to-end tests that start a real server with a **temporary database** and the deterministic offline agent: registration and login, cookie flags, forged tokens, CSRF and foreign-origin requests, security headers, input validation, cross-user isolation, propose → approve, double approval (409), approving another user's proposal (404), the €300 limit, policy re-check at approval, rejection, kill switch and audit logging.
+
+The tests never touch your own `data/studentfin.db` and never call the Anthropic API. The full list with expected results is in [`TEST_CASES.md`](TEST_CASES.md).
+
+## Sandbox operation logs
+
+```bash
+npm run sandbox
+```
+
+Runs 14 realistic scenarios on a **simulated student account** in an isolated sandbox server and writes the results to [`sandbox-logs/`](sandbox-logs):
+
+- `operation-log.md` — readable log: each request, the tools the agent called, its answer, the proposals, the student's decision and whether data changed
+- `operation-log.json` — the same in machine-readable form
+- `activity-log.json` — the raw per-user audit trail from the database
+
+No real money, bank or payment system is involved: the agent can only read data and propose records that the student approves or rejects.
+
+---
+
 ## Data model (code-first)
 
 The schema is defined in code in `server/db.js` (Sequelize ORM) and the tables are generated from it on start-up with `sequelize.sync()`. SQLite is used by default; set `DATABASE_URL` to use PostgreSQL instead.

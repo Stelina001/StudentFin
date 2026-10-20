@@ -9,7 +9,9 @@
     "build": "vite build",
     "start": "node server/index.js",
     "prod": "vite build && node server/index.js",
-    "db:reset": "node -e \"require('fs').rmSync('data',{recursive:true,force:true});console.log('Database deleted. It will be recreated on next start.')\""
+    "db:reset": "node -e \"require('fs').rmSync('data',{recursive:true,force:true});console.log('Database deleted. It will be recreated on next start.')\"",
+    "test": "node --test tests/unit.test.js tests/api.test.js",
+    "sandbox": "node scripts/sandbox-run.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.60.0",
@@ -29,7 +31,7 @@
     "sqlite3": "^5.1.7",
     "vite": "^6.0.7"
   },
-  "description": "StudentFin AI \u2013 an AI finance agent for students who study or receive money across borders (FinTechathon 2026, Topic C).",
+  "description": "StudentFin AI – an AI finance agent for students who study or receive money across borders (FinTechathon 2026, Topic C).",
   "engines": {
     "node": ">=18"
   }

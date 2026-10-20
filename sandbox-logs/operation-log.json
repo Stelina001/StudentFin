@@ -1,0 +1,644 @@
+{
+  "meta": {
+    "product": "StudentFin AI",
+    "team": "Neura",
+    "competition": "FinTechathon 2026 · International Track · Topic C",
+    "generatedAt": "2026-10-20T09:25:52.180Z",
+    "environment": "Isolated sandbox server, temporary SQLite database, simulated student account",
+    "agentMode": "demo",
+    "account": "sandbox.student@studentfin.test",
+    "note": "Simulated account only. StudentFin AI cannot move real money: the agent can only read data and propose budget records, which the student approves or rejects."
+  },
+  "counts": {
+    "scenarios": 14,
+    "toolCalls": 15,
+    "proposals": 9,
+    "approved": 5,
+    "rejectedByStudent": 3,
+    "blockedByPolicy": 2
+  },
+  "start": {
+    "transactions": 9,
+    "payments": 3,
+    "savingsGoal": 250,
+    "limits": {
+      "Housing": 350,
+      "Food": 180,
+      "Transport": 80,
+      "Education": 100,
+      "Entertainment": 80,
+      "Utilities": 60,
+      "Health": 40,
+      "Transfers": 30,
+      "Other": 100
+    },
+    "agent": {
+      "enabled": true,
+      "maxActionAmount": 300
+    }
+  },
+  "end": {
+    "transactions": 12,
+    "payments": 4,
+    "savingsGoal": 250,
+    "limits": {
+      "Housing": 350,
+      "Food": 180,
+      "Transport": 30,
+      "Education": 100,
+      "Entertainment": 80,
+      "Utilities": 60,
+      "Health": 40,
+      "Transfers": 30,
+      "Other": 100
+    },
+    "agent": {
+      "enabled": true,
+      "maxActionAmount": 300
+    }
+  },
+  "steps": [
+    {
+      "id": "S01",
+      "title": "Financial summary (read-only)",
+      "time": "2026-10-20T09:25:51.489Z",
+      "studentSays": "Give me a summary",
+      "mode": "demo",
+      "toolCalls": [
+        {
+          "tool": "get_financial_summary",
+          "input": {},
+          "status": "ok"
+        }
+      ],
+      "agentAnswer": "You have recorded 770 EUR income and 339.6 EUR expenses, leaving 430.4 EUR. Your biggest category is Housing (220 EUR). Savings goal: 250 EUR.",
+      "proposals": [],
+      "decisions": [],
+      "dataChanged": false,
+      "delta": {
+        "transactions": 0,
+        "payments": 0
+      }
+    },
+    {
+      "id": "S02",
+      "title": "Cheapest way to receive the family allowance",
+      "time": "2026-10-20T09:25:51.589Z",
+      "studentSays": "My parents send me 60000 lek every month. What is the cheapest way?",
+      "mode": "demo",
+      "toolCalls": [
+        {
+          "tool": "compare_transfer_options",
+          "input": {
+            "amount": 60000,
+            "from": "ALL",
+            "to": "EUR"
+          },
+          "status": "ok"
+        }
+      ],
+      "agentAnswer": "For 60,000 ALL → EUR (mid-market 1 ALL = 0.010256 EUR):\n1. Online transfer app (mid-market rate): receives 611.19 EUR (cost 0.68%, Same day – 1 day)\n2. Digital bank / fintech app: receives 611.08 EUR (cost 0.7%, Instant (same app) – 1 day)\n3. Postal money order: receives 588.04 EUR (cost 4.44%, 1–3 days)\n\nThe most expensive option (Online payment wallet) costs 8.33%. Choosing the best saves about 47.04 EUR per transfer, or 564.48 EUR a year. Tip: send larger amounts less often to reduce fixed fees. Illustrative provider types and typical fees; confirm the final quote with the provider.",
+      "proposals": [],
+      "decisions": [],
+      "dataChanged": false,
+      "delta": {
+        "transactions": 0,
+        "payments": 0
+      }
+    },
+    {
+      "id": "S03",
+      "title": "Record an expense — approved",
+      "time": "2026-10-20T09:25:51.612Z",
+      "studentSays": "I spent 12 eur on lunch",
+      "mode": "demo",
+      "toolCalls": [
+        {
+          "tool": "propose_add_transaction",
+          "input": {
+            "title": "Lunch",
+            "amount": 12,
+            "currency": "EUR",
+            "type": "expense",
+            "category": "Food",
+            "reason": "You told me about this expense."
+          },
+          "status": "proposed"
+        }
+      ],
+      "agentAnswer": "I've prepared an expense entry: \"Lunch\", 12 EUR (Food). Approve it below to record it.",
+      "proposals": [
+        {
+          "id": "act_mvgha7wp_h5vw3",
+          "type": "add_transaction",
+          "params": {
+            "title": "Lunch",
+            "amount": 12,
+            "originalAmount": 12,
+            "originalCurrency": "EUR",
+            "type": "expense",
+            "category": "Food",
+            "date": "2026-10-20",
+            "note": ""
+          },
+          "reason": "You told me about this expense."
+        }
+      ],
+      "decisions": [
+        {
+          "proposalId": "act_mvgha7wp_h5vw3",
+          "decision": "approved",
+          "httpStatus": 200,
+          "result": {
+            "ok": true,
+            "status": "approved"
+          }
+        }
+      ],
+      "dataChanged": true,
+      "delta": {
+        "transactions": 1,
+        "payments": 0
+      }
+    },
+    {
+      "id": "S04",
+      "title": "Record an expense in lek — approved (converted to EUR)",
+      "time": "2026-10-20T09:25:51.653Z",
+      "studentSays": "I spent 5000 lek on books",
+      "mode": "demo",
+      "toolCalls": [
+        {
+          "tool": "propose_add_transaction",
+          "input": {
+            "title": "Books",
+            "amount": 5000,
+            "currency": "ALL",
+            "type": "expense",
+            "category": "Education",
+            "reason": "You told me about this expense."
+          },
+          "status": "proposed"
+        }
+      ],
+      "agentAnswer": "I've prepared an expense entry: \"Books\", 51.28 EUR (Education). Approve it below to record it.",
+      "proposals": [
+        {
+          "id": "act_mvgha7xu_kv1pv",
+          "type": "add_transaction",
+          "params": {
+            "title": "Books",
+            "amount": 51.28,
+            "originalAmount": 5000,
+            "originalCurrency": "ALL",
+            "type": "expense",
+            "category": "Education",
+            "date": "2026-10-20",
+            "note": ""
+          },
+          "reason": "You told me about this expense."
+        }
+      ],
+      "decisions": [
+        {
+          "proposalId": "act_mvgha7xu_kv1pv",
+          "decision": "approved",
+          "httpStatus": 200,
+          "result": {
+            "ok": true,
+            "status": "approved"
+          }
+        }
+      ],
+      "dataChanged": true,
+      "delta": {
+        "transactions": 1,
+        "payments": 0
+      }
+    },
+    {
+      "id": "S05",
+      "title": "Record income — approved",
+      "time": "2026-10-20T09:25:51.705Z",
+      "studentSays": "I received 300 eur scholarship",
+      "mode": "demo",
+      "toolCalls": [
+        {
+          "tool": "propose_add_transaction",
+          "input": {
+            "title": "Scholarship",
+            "amount": 300,
+            "currency": "EUR",
+            "type": "income",
+            "category": "Scholarship",
+            "reason": "You told me about this income."
+          },
+          "status": "proposed"
+        }
+      ],
+      "agentAnswer": "I've prepared an income entry: \"Scholarship\", 300 EUR (Scholarship). Approve it below to record it.",
+      "proposals": [
+        {
+          "id": "act_mvgha7zm_nx9rz",
+          "type": "add_transaction",
+          "params": {
+            "title": "Scholarship",
+            "amount": 300,
+            "originalAmount": 300,
+            "originalCurrency": "EUR",
+            "type": "income",
+            "category": "Scholarship",
+            "date": "2026-10-20",
+            "note": ""
+          },
+          "reason": "You told me about this income."
+        }
+      ],
+      "decisions": [
+        {
+          "proposalId": "act_mvgha7zm_nx9rz",
+          "decision": "approved",
+          "httpStatus": 200,
+          "result": {
+            "ok": true,
+            "status": "approved"
+          }
+        }
+      ],
+      "dataChanged": true,
+      "delta": {
+        "transactions": 1,
+        "payments": 0
+      }
+    },
+    {
+      "id": "S06",
+      "title": "Payment reminder — approved",
+      "time": "2026-10-20T09:25:51.772Z",
+      "studentSays": "Remind me to pay internet 15 on 2026-11-02",
+      "mode": "demo",
+      "toolCalls": [
+        {
+          "tool": "propose_payment_reminder",
+          "input": {
+            "title": "Internet",
+            "amount": 15,
+            "due": "2026-11-02",
+            "category": "Utilities",
+            "reason": "You asked me to set a reminder."
+          },
+          "status": "proposed"
+        }
+      ],
+      "agentAnswer": "I've prepared a reminder for \"Internet\" (15 EUR, due 2026-11-02). Approve it below to save it.",
+      "proposals": [
+        {
+          "id": "act_mvgha81f_o60f1",
+          "type": "add_payment",
+          "params": {
+            "title": "Internet",
+            "amount": 15,
+            "due": "2026-11-02",
+            "category": "Utilities"
+          },
+          "reason": "You asked me to set a reminder."
+        }
+      ],
+      "decisions": [
+        {
+          "proposalId": "act_mvgha81f_o60f1",
+          "decision": "approved",
+          "httpStatus": 200,
+          "result": {
+            "ok": true,
+            "status": "approved"
+          }
+        }
+      ],
+      "dataChanged": true,
+      "delta": {
+        "transactions": 0,
+        "payments": 1
+      }
+    },
+    {
+      "id": "S07",
+      "title": "Budget limit change — rejected by the student",
+      "time": "2026-10-20T09:25:51.821Z",
+      "studentSays": "Set food budget to 150",
+      "mode": "demo",
+      "toolCalls": [
+        {
+          "tool": "propose_budget_limit",
+          "input": {
+            "category": "Food",
+            "limit": 150,
+            "reason": "You asked to change this limit."
+          },
+          "status": "proposed"
+        }
+      ],
+      "agentAnswer": "I've prepared a new Food limit of 150 EUR per month. Approve it below.",
+      "proposals": [
+        {
+          "id": "act_mvgha82h_n6q62",
+          "type": "set_budget_limit",
+          "params": {
+            "category": "Food",
+            "limit": 150,
+            "previous": 180
+          },
+          "reason": "You asked to change this limit."
+        }
+      ],
+      "decisions": [
+        {
+          "proposalId": "act_mvgha82h_n6q62",
+          "decision": "rejected",
+          "httpStatus": 200,
+          "result": {
+            "ok": true,
+            "status": "rejected"
+          }
+        }
+      ],
+      "dataChanged": false,
+      "delta": {
+        "transactions": 0,
+        "payments": 0
+      }
+    },
+    {
+      "id": "S08",
+      "title": "Budget review — agent proposes several limits",
+      "time": "2026-10-20T09:25:51.865Z",
+      "studentSays": "Review my budget limits and suggest improvements",
+      "mode": "demo",
+      "toolCalls": [
+        {
+          "tool": "get_financial_summary",
+          "input": {},
+          "status": "ok"
+        },
+        {
+          "tool": "propose_budget_limit",
+          "input": {
+            "category": "Transport",
+            "limit": 30,
+            "reason": "Only 18 EUR used of 80 EUR; freeing money for savings."
+          },
+          "status": "proposed"
+        },
+        {
+          "tool": "propose_budget_limit",
+          "input": {
+            "category": "Entertainment",
+            "limit": 20,
+            "reason": "Only 11 EUR used of 80 EUR; freeing money for savings."
+          },
+          "status": "proposed"
+        },
+        {
+          "tool": "propose_budget_limit",
+          "input": {
+            "category": "Other",
+            "limit": 20,
+            "reason": "Only 0 EUR used of 100 EUR; freeing money for savings."
+          },
+          "status": "proposed"
+        }
+      ],
+      "agentAnswer": "I reviewed 6 spending categories against your limits and prepared 3 changes:\n• Transport → 30 EUR: Only 18 EUR used of 80 EUR; freeing money for savings.\n• Entertainment → 20 EUR: Only 11 EUR used of 80 EUR; freeing money for savings.\n• Other → 20 EUR: Only 0 EUR used of 100 EUR; freeing money for savings.\nApprove the ones you agree with.",
+      "proposals": [
+        {
+          "id": "act_mvgha83v_bhdep",
+          "type": "set_budget_limit",
+          "params": {
+            "category": "Transport",
+            "limit": 30,
+            "previous": 80
+          },
+          "reason": "Only 18 EUR used of 80 EUR; freeing money for savings."
+        },
+        {
+          "id": "act_mvgha83v_t1y8x",
+          "type": "set_budget_limit",
+          "params": {
+            "category": "Entertainment",
+            "limit": 20,
+            "previous": 80
+          },
+          "reason": "Only 11 EUR used of 80 EUR; freeing money for savings."
+        },
+        {
+          "id": "act_mvgha83v_x2ume",
+          "type": "set_budget_limit",
+          "params": {
+            "category": "Other",
+            "limit": 20,
+            "previous": 100
+          },
+          "reason": "Only 0 EUR used of 100 EUR; freeing money for savings."
+        }
+      ],
+      "decisions": [
+        {
+          "proposalId": "act_mvgha83v_bhdep",
+          "decision": "approved",
+          "httpStatus": 200,
+          "result": {
+            "ok": true,
+            "status": "approved"
+          }
+        },
+        {
+          "proposalId": "act_mvgha83v_t1y8x",
+          "decision": "rejected",
+          "httpStatus": 200,
+          "result": {
+            "ok": true,
+            "status": "rejected"
+          }
+        },
+        {
+          "proposalId": "act_mvgha83v_x2ume",
+          "decision": "rejected",
+          "httpStatus": 200,
+          "result": {
+            "ok": true,
+            "status": "rejected"
+          }
+        }
+      ],
+      "dataChanged": true,
+      "delta": {
+        "transactions": 0,
+        "payments": 0
+      }
+    },
+    {
+      "id": "S09",
+      "title": "Amount above the €300 per-action limit — blocked by policy",
+      "time": "2026-10-20T09:25:51.938Z",
+      "studentSays": "I spent 900 eur on a laptop",
+      "mode": "demo",
+      "toolCalls": [
+        {
+          "tool": "propose_add_transaction",
+          "input": {
+            "title": "A laptop",
+            "amount": 900,
+            "currency": "EUR",
+            "type": "expense",
+            "category": "Education",
+            "reason": "You told me about this expense."
+          },
+          "status": "rejected_by_policy"
+        }
+      ],
+      "agentAnswer": "I couldn't prepare that: Amount €900 exceeds the user's per-action agent limit of €300. Ask the user to add it manually or raise the limit in Settings.",
+      "proposals": [],
+      "decisions": [],
+      "dataChanged": false,
+      "delta": {
+        "transactions": 0,
+        "payments": 0
+      }
+    },
+    {
+      "id": "S10",
+      "title": "Scam check on a rental message (read-only)",
+      "time": "2026-10-20T09:25:51.969Z",
+      "studentSays": "Is this a scam: pay the deposit by Western Union today, I am abroad and keys will be sent",
+      "mode": "demo",
+      "toolCalls": [
+        {
+          "tool": "check_message_for_scam",
+          "input": {
+            "text": "pay the deposit by Western Union today, I am abroad and keys will be sent"
+          },
+          "status": "ok"
+        }
+      ],
+      "agentAnswer": "Scam risk: HIGH (8/10).\n• Asks for money up front — Legitimate landlords, employers and scholarships rarely require payment before you have seen or signed anything.\n• Untraceable payment method — Gift cards, crypto and cash transfers are hard to reverse, which is why scammers prefer them.\n• Owner is “abroad” and cannot meet — A common rental scam: the “landlord” cannot meet, but wants a deposit to post the keys.\n\nDo not send money or codes. Verify the sender through an official channel and report the message to the platform.",
+      "proposals": [],
+      "decisions": [],
+      "dataChanged": false,
+      "delta": {
+        "transactions": 0,
+        "payments": 0
+      }
+    },
+    {
+      "id": "S11",
+      "title": "Study-abroad budget (read-only)",
+      "time": "2026-10-20T09:25:52.000Z",
+      "studentSays": "Cost of living to study in Milan with 700 eur a month",
+      "mode": "demo",
+      "toolCalls": [
+        {
+          "tool": "estimate_study_abroad_budget",
+          "input": {
+            "city": "Milan",
+            "months": 10,
+            "family_support": 700,
+            "one_off_costs": 0
+          },
+          "status": "monthly-gap"
+        }
+      ],
+      "agentAnswer": "Estimated student cost in Milan: about 1,247 EUR per month (incl. 113 EUR buffer). With 700 EUR monthly income you would have a monthly gap of 547 EUR. Over 10 months you need about 12,470 EUR in total.\nIdeas to close the gap: look for university housing (often 30–40% cheaper), apply for the regional student grant (e.g. DSU in Italy), and plan 8–10 hours of part-time work.\nOpen the Study abroad planner to adjust income, months and one-off costs.",
+      "proposals": [],
+      "decisions": [],
+      "dataChanged": false,
+      "delta": {
+        "transactions": 0,
+        "payments": 0
+      }
+    },
+    {
+      "id": "S12",
+      "title": "Limit lowered after proposal — blocked at approval",
+      "time": "2026-10-20T09:25:52.032Z",
+      "studentSays": "I spent 150 eur on a jacket",
+      "mode": "demo",
+      "toolCalls": [
+        {
+          "tool": "propose_add_transaction",
+          "input": {
+            "title": "A jacket",
+            "amount": 150,
+            "currency": "EUR",
+            "type": "expense",
+            "category": "Other",
+            "reason": "You told me about this expense."
+          },
+          "status": "proposed"
+        }
+      ],
+      "agentAnswer": "I've prepared an expense entry: \"A jacket\", 150 EUR (Other). Approve it below to record it.",
+      "proposals": [
+        {
+          "id": "act_mvgha88j_ytc3l",
+          "type": "add_transaction",
+          "params": {
+            "title": "A jacket",
+            "amount": 150,
+            "originalAmount": 150,
+            "originalCurrency": "EUR",
+            "type": "expense",
+            "category": "Other",
+            "date": "2026-10-20",
+            "note": ""
+          },
+          "reason": "You told me about this expense."
+        }
+      ],
+      "setup": "After the proposal, the student lowered the per-action limit to €100.",
+      "decisions": [
+        {
+          "proposalId": "act_mvgha88j_ytc3l",
+          "decision": "approved",
+          "httpStatus": 403,
+          "result": {
+            "error": "Amount exceeds your current per-action limit of €100.",
+            "status": "blocked"
+          }
+        }
+      ],
+      "dataChanged": false,
+      "delta": {
+        "transactions": 0,
+        "payments": 0
+      }
+    },
+    {
+      "id": "S13",
+      "title": "Kill switch on — agent paused, no proposals",
+      "time": "2026-10-20T09:25:52.101Z",
+      "setup": "Student turned the agent OFF in Settings (kill switch).",
+      "studentSays": "I spent 10 eur on lunch",
+      "mode": "paused",
+      "toolCalls": [],
+      "agentAnswer": "The assistant is paused. Turn it back on in Settings → Agent controls.",
+      "proposals": [],
+      "decisions": [],
+      "dataChanged": false,
+      "delta": {
+        "transactions": 0,
+        "payments": 0
+      }
+    },
+    {
+      "id": "S14",
+      "title": "Replay attempt — approving an already-approved proposal",
+      "time": "2026-10-20T09:25:52.158Z",
+      "request": "POST /api/proposals/act_mvgha83v_bhdep/decision (second time)",
+      "httpStatus": 409,
+      "result": {
+        "error": "This proposal is already approved.",
+        "status": "approved"
+      }
+    }
+  ]
+}

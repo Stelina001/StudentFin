@@ -1,0 +1,620 @@
+[
+  {
+    "id": 1,
+    "time": "2026-10-20T09:25:51.450Z",
+    "kind": "auth",
+    "tool": null,
+    "actionType": "register",
+    "input": null,
+    "params": null,
+    "status": "ok",
+    "reason": null,
+    "mode": null
+  },
+  {
+    "id": 2,
+    "time": "2026-10-20T09:25:51.577Z",
+    "kind": "tool",
+    "tool": "get_financial_summary",
+    "actionType": null,
+    "input": {},
+    "params": null,
+    "status": "ok",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 3,
+    "time": "2026-10-20T09:25:51.604Z",
+    "kind": "tool",
+    "tool": "compare_transfer_options",
+    "actionType": null,
+    "input": {
+      "amount": 60000,
+      "from": "ALL",
+      "to": "EUR"
+    },
+    "params": null,
+    "status": "ok",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 4,
+    "time": "2026-10-20T09:25:51.628Z",
+    "kind": "tool",
+    "tool": "propose_add_transaction",
+    "actionType": null,
+    "input": {
+      "title": "Lunch",
+      "amount": 12,
+      "currency": "EUR",
+      "type": "expense",
+      "category": "Food",
+      "reason": "You told me about this expense."
+    },
+    "params": null,
+    "status": "proposed",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 5,
+    "time": "2026-10-20T09:25:51.628Z",
+    "kind": "proposal",
+    "tool": null,
+    "actionType": "add_transaction",
+    "input": null,
+    "params": {
+      "title": "Lunch",
+      "amount": 12,
+      "originalAmount": 12,
+      "originalCurrency": "EUR",
+      "type": "expense",
+      "category": "Food",
+      "date": "2026-10-20",
+      "note": ""
+    },
+    "status": "pending",
+    "reason": "You told me about this expense.",
+    "mode": "demo"
+  },
+  {
+    "id": 6,
+    "time": "2026-10-20T09:25:51.640Z",
+    "kind": "decision",
+    "tool": null,
+    "actionType": "add_transaction",
+    "input": null,
+    "params": {
+      "title": "Lunch",
+      "amount": 12,
+      "originalAmount": 12,
+      "originalCurrency": "EUR",
+      "type": "expense",
+      "category": "Food",
+      "date": "2026-10-20",
+      "note": ""
+    },
+    "status": "approved",
+    "reason": "You told me about this expense.",
+    "mode": null
+  },
+  {
+    "id": 7,
+    "time": "2026-10-20T09:25:51.670Z",
+    "kind": "tool",
+    "tool": "propose_add_transaction",
+    "actionType": null,
+    "input": {
+      "title": "Books",
+      "amount": 5000,
+      "currency": "ALL",
+      "type": "expense",
+      "category": "Education",
+      "reason": "You told me about this expense."
+    },
+    "params": null,
+    "status": "proposed",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 8,
+    "time": "2026-10-20T09:25:51.670Z",
+    "kind": "proposal",
+    "tool": null,
+    "actionType": "add_transaction",
+    "input": null,
+    "params": {
+      "title": "Books",
+      "amount": 51.28,
+      "originalAmount": 5000,
+      "originalCurrency": "ALL",
+      "type": "expense",
+      "category": "Education",
+      "date": "2026-10-20",
+      "note": ""
+    },
+    "status": "pending",
+    "reason": "You told me about this expense.",
+    "mode": "demo"
+  },
+  {
+    "id": 9,
+    "time": "2026-10-20T09:25:51.686Z",
+    "kind": "decision",
+    "tool": null,
+    "actionType": "add_transaction",
+    "input": null,
+    "params": {
+      "title": "Books",
+      "amount": 51.28,
+      "originalAmount": 5000,
+      "originalCurrency": "ALL",
+      "type": "expense",
+      "category": "Education",
+      "date": "2026-10-20",
+      "note": ""
+    },
+    "status": "approved",
+    "reason": "You told me about this expense.",
+    "mode": null
+  },
+  {
+    "id": 10,
+    "time": "2026-10-20T09:25:51.739Z",
+    "kind": "tool",
+    "tool": "propose_add_transaction",
+    "actionType": null,
+    "input": {
+      "title": "Scholarship",
+      "amount": 300,
+      "currency": "EUR",
+      "type": "income",
+      "category": "Scholarship",
+      "reason": "You told me about this income."
+    },
+    "params": null,
+    "status": "proposed",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 11,
+    "time": "2026-10-20T09:25:51.739Z",
+    "kind": "proposal",
+    "tool": null,
+    "actionType": "add_transaction",
+    "input": null,
+    "params": {
+      "title": "Scholarship",
+      "amount": 300,
+      "originalAmount": 300,
+      "originalCurrency": "EUR",
+      "type": "income",
+      "category": "Scholarship",
+      "date": "2026-10-20",
+      "note": ""
+    },
+    "status": "pending",
+    "reason": "You told me about this income.",
+    "mode": "demo"
+  },
+  {
+    "id": 12,
+    "time": "2026-10-20T09:25:51.757Z",
+    "kind": "decision",
+    "tool": null,
+    "actionType": "add_transaction",
+    "input": null,
+    "params": {
+      "title": "Scholarship",
+      "amount": 300,
+      "originalAmount": 300,
+      "originalCurrency": "EUR",
+      "type": "income",
+      "category": "Scholarship",
+      "date": "2026-10-20",
+      "note": ""
+    },
+    "status": "approved",
+    "reason": "You told me about this income.",
+    "mode": null
+  },
+  {
+    "id": 13,
+    "time": "2026-10-20T09:25:51.798Z",
+    "kind": "tool",
+    "tool": "propose_payment_reminder",
+    "actionType": null,
+    "input": {
+      "title": "Internet",
+      "amount": 15,
+      "due": "2026-11-02",
+      "category": "Utilities",
+      "reason": "You asked me to set a reminder."
+    },
+    "params": null,
+    "status": "proposed",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 14,
+    "time": "2026-10-20T09:25:51.798Z",
+    "kind": "proposal",
+    "tool": null,
+    "actionType": "add_payment",
+    "input": null,
+    "params": {
+      "title": "Internet",
+      "amount": 15,
+      "due": "2026-11-02",
+      "category": "Utilities"
+    },
+    "status": "pending",
+    "reason": "You asked me to set a reminder.",
+    "mode": "demo"
+  },
+  {
+    "id": 15,
+    "time": "2026-10-20T09:25:51.812Z",
+    "kind": "decision",
+    "tool": null,
+    "actionType": "add_payment",
+    "input": null,
+    "params": {
+      "title": "Internet",
+      "amount": 15,
+      "due": "2026-11-02",
+      "category": "Utilities"
+    },
+    "status": "approved",
+    "reason": "You asked me to set a reminder.",
+    "mode": null
+  },
+  {
+    "id": 16,
+    "time": "2026-10-20T09:25:51.836Z",
+    "kind": "tool",
+    "tool": "propose_budget_limit",
+    "actionType": null,
+    "input": {
+      "category": "Food",
+      "limit": 150,
+      "reason": "You asked to change this limit."
+    },
+    "params": null,
+    "status": "proposed",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 17,
+    "time": "2026-10-20T09:25:51.836Z",
+    "kind": "proposal",
+    "tool": null,
+    "actionType": "set_budget_limit",
+    "input": null,
+    "params": {
+      "category": "Food",
+      "limit": 150,
+      "previous": 180
+    },
+    "status": "pending",
+    "reason": "You asked to change this limit.",
+    "mode": "demo"
+  },
+  {
+    "id": 18,
+    "time": "2026-10-20T09:25:51.852Z",
+    "kind": "decision",
+    "tool": null,
+    "actionType": "set_budget_limit",
+    "input": null,
+    "params": {
+      "category": "Food",
+      "limit": 150,
+      "previous": 180
+    },
+    "status": "rejected",
+    "reason": "You asked to change this limit.",
+    "mode": null
+  },
+  {
+    "id": 19,
+    "time": "2026-10-20T09:25:51.887Z",
+    "kind": "tool",
+    "tool": "get_financial_summary",
+    "actionType": null,
+    "input": {},
+    "params": null,
+    "status": "ok",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 20,
+    "time": "2026-10-20T09:25:51.887Z",
+    "kind": "tool",
+    "tool": "propose_budget_limit",
+    "actionType": null,
+    "input": {
+      "category": "Transport",
+      "limit": 30,
+      "reason": "Only 18 EUR used of 80 EUR; freeing money for savings."
+    },
+    "params": null,
+    "status": "proposed",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 21,
+    "time": "2026-10-20T09:25:51.887Z",
+    "kind": "tool",
+    "tool": "propose_budget_limit",
+    "actionType": null,
+    "input": {
+      "category": "Entertainment",
+      "limit": 20,
+      "reason": "Only 11 EUR used of 80 EUR; freeing money for savings."
+    },
+    "params": null,
+    "status": "proposed",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 22,
+    "time": "2026-10-20T09:25:51.887Z",
+    "kind": "tool",
+    "tool": "propose_budget_limit",
+    "actionType": null,
+    "input": {
+      "category": "Other",
+      "limit": 20,
+      "reason": "Only 0 EUR used of 100 EUR; freeing money for savings."
+    },
+    "params": null,
+    "status": "proposed",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 23,
+    "time": "2026-10-20T09:25:51.887Z",
+    "kind": "proposal",
+    "tool": null,
+    "actionType": "set_budget_limit",
+    "input": null,
+    "params": {
+      "category": "Transport",
+      "limit": 30,
+      "previous": 80
+    },
+    "status": "pending",
+    "reason": "Only 18 EUR used of 80 EUR; freeing money for savings.",
+    "mode": "demo"
+  },
+  {
+    "id": 24,
+    "time": "2026-10-20T09:25:51.887Z",
+    "kind": "proposal",
+    "tool": null,
+    "actionType": "set_budget_limit",
+    "input": null,
+    "params": {
+      "category": "Entertainment",
+      "limit": 20,
+      "previous": 80
+    },
+    "status": "pending",
+    "reason": "Only 11 EUR used of 80 EUR; freeing money for savings.",
+    "mode": "demo"
+  },
+  {
+    "id": 25,
+    "time": "2026-10-20T09:25:51.887Z",
+    "kind": "proposal",
+    "tool": null,
+    "actionType": "set_budget_limit",
+    "input": null,
+    "params": {
+      "category": "Other",
+      "limit": 20,
+      "previous": 100
+    },
+    "status": "pending",
+    "reason": "Only 0 EUR used of 100 EUR; freeing money for savings.",
+    "mode": "demo"
+  },
+  {
+    "id": 26,
+    "time": "2026-10-20T09:25:51.901Z",
+    "kind": "decision",
+    "tool": null,
+    "actionType": "set_budget_limit",
+    "input": null,
+    "params": {
+      "category": "Transport",
+      "limit": 30,
+      "previous": 80
+    },
+    "status": "approved",
+    "reason": "Only 18 EUR used of 80 EUR; freeing money for savings.",
+    "mode": null
+  },
+  {
+    "id": 27,
+    "time": "2026-10-20T09:25:51.912Z",
+    "kind": "decision",
+    "tool": null,
+    "actionType": "set_budget_limit",
+    "input": null,
+    "params": {
+      "category": "Entertainment",
+      "limit": 20,
+      "previous": 80
+    },
+    "status": "rejected",
+    "reason": "Only 11 EUR used of 80 EUR; freeing money for savings.",
+    "mode": null
+  },
+  {
+    "id": 28,
+    "time": "2026-10-20T09:25:51.925Z",
+    "kind": "decision",
+    "tool": null,
+    "actionType": "set_budget_limit",
+    "input": null,
+    "params": {
+      "category": "Other",
+      "limit": 20,
+      "previous": 100
+    },
+    "status": "rejected",
+    "reason": "Only 0 EUR used of 100 EUR; freeing money for savings.",
+    "mode": null
+  },
+  {
+    "id": 29,
+    "time": "2026-10-20T09:25:51.951Z",
+    "kind": "tool",
+    "tool": "propose_add_transaction",
+    "actionType": null,
+    "input": {
+      "title": "A laptop",
+      "amount": 900,
+      "currency": "EUR",
+      "type": "expense",
+      "category": "Education",
+      "reason": "You told me about this expense."
+    },
+    "params": null,
+    "status": "rejected_by_policy",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 30,
+    "time": "2026-10-20T09:25:51.988Z",
+    "kind": "tool",
+    "tool": "check_message_for_scam",
+    "actionType": null,
+    "input": {
+      "text": "pay the deposit by Western Union today, I am abroad and keys will be sent"
+    },
+    "params": null,
+    "status": "ok",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 31,
+    "time": "2026-10-20T09:25:52.017Z",
+    "kind": "tool",
+    "tool": "estimate_study_abroad_budget",
+    "actionType": null,
+    "input": {
+      "city": "Milan",
+      "months": 10,
+      "family_support": 700,
+      "one_off_costs": 0
+    },
+    "params": null,
+    "status": "monthly-gap",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 32,
+    "time": "2026-10-20T09:25:52.055Z",
+    "kind": "tool",
+    "tool": "propose_add_transaction",
+    "actionType": null,
+    "input": {
+      "title": "A jacket",
+      "amount": 150,
+      "currency": "EUR",
+      "type": "expense",
+      "category": "Other",
+      "reason": "You told me about this expense."
+    },
+    "params": null,
+    "status": "proposed",
+    "reason": null,
+    "mode": "demo"
+  },
+  {
+    "id": 33,
+    "time": "2026-10-20T09:25:52.055Z",
+    "kind": "proposal",
+    "tool": null,
+    "actionType": "add_transaction",
+    "input": null,
+    "params": {
+      "title": "A jacket",
+      "amount": 150,
+      "originalAmount": 150,
+      "originalCurrency": "EUR",
+      "type": "expense",
+      "category": "Other",
+      "date": "2026-10-20",
+      "note": ""
+    },
+    "status": "pending",
+    "reason": "You told me about this expense.",
+    "mode": "demo"
+  },
+  {
+    "id": 34,
+    "time": "2026-10-20T09:25:52.077Z",
+    "kind": "decision",
+    "tool": null,
+    "actionType": "add_transaction",
+    "input": null,
+    "params": {
+      "title": "A jacket",
+      "amount": 150,
+      "originalAmount": 150,
+      "originalCurrency": "EUR",
+      "type": "expense",
+      "category": "Other",
+      "date": "2026-10-20",
+      "note": ""
+    },
+    "status": "rejected_by_policy",
+    "reason": "You told me about this expense.",
+    "mode": null
+  },
+  {
+    "id": 35,
+    "time": "2026-10-20T09:25:52.112Z",
+    "kind": "manual",
+    "tool": null,
+    "actionType": "agent_toggle",
+    "input": null,
+    "params": {
+      "enabled": false
+    },
+    "status": "paused",
+    "reason": null,
+    "mode": null
+  },
+  {
+    "id": 36,
+    "time": "2026-10-20T09:25:52.154Z",
+    "kind": "manual",
+    "tool": null,
+    "actionType": "agent_toggle",
+    "input": null,
+    "params": {
+      "enabled": true
+    },
+    "status": "enabled",
+    "reason": null,
+    "mode": null
+  }
+]
