@@ -1,0 +1,36 @@
+{
+  "name": "studentfin-ai",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"npm:server\"",
+    "server": "node server/index.js",
+    "build": "vite build",
+    "start": "node server/index.js",
+    "prod": "vite build && node server/index.js",
+    "db:reset": "node -e \"require('fs').rmSync('data',{recursive:true,force:true});console.log('Database deleted. It will be recreated on next start.')\""
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.60.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^9.1.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.3",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.0",
+    "sequelize": "^6.37.8",
+    "sqlite3": "^5.1.7",
+    "vite": "^6.0.7"
+  },
+  "description": "StudentFin AI \u2013 an AI finance agent for students who study or receive money across borders (FinTechathon 2026, Topic C).",
+  "engines": {
+    "node": ">=18"
+  }
+}
