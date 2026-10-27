@@ -1,6 +1,4 @@
-// End-to-end API tests against a real server instance with a temporary database.
-// The offline demo agent is used (no API key, no network), so results are deterministic.
-// Run: npm test
+
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { startServer, client, ask } from './helpers.js';
@@ -15,7 +13,7 @@ before(async () => {
 });
 after(async () => { await srv?.stop(); });
 
-// ---------- accounts and sessions ----------
+
 test('T-A01 health endpoint reports offline demo mode', async () => {
   const r = await client(srv.base).get('/api/health');
   assert.equal(r.status, 200);
@@ -57,7 +55,7 @@ test('T-A06 a forged session token is rejected', async () => {
   assert.equal(r.status, 401);
 });
 
-// ---------- CSRF and headers ----------
+
 test('T-A07 state-changing request without the client header is refused (CSRF)', async () => {
   const r = await alice.post('/api/transactions', { title: 'x', amount: 1, type: 'expense', category: 'Food', date: '2026-10-20' }, { csrf: false });
   assert.equal(r.status, 403);
@@ -73,7 +71,7 @@ test('T-A09 security headers are set on every response', async () => {
   assert.equal(r.headers.get('x-powered-by'), null);
 });
 
-// ---------- data validation and isolation ----------
+
 test('T-A10 invalid transactions are rejected by server-side validation', async () => {
   const r = await alice.post('/api/transactions', { title: '', amount: -5, type: 'gift', category: 'Food', date: 'tomorrow' });
   assert.equal(r.status, 400);
@@ -88,7 +86,7 @@ test('T-A11 users cannot read or delete each other’s records', async () => {
   assert.ok(aliceData.data.transactions.some(t => t.title === 'Alice private'));
 });
 
-// ---------- agent: propose → approve ----------
+
 test('T-A12 agent proposes an expense; nothing changes until the student approves', async () => {
   const before = (await alice.get('/api/data')).data.transactions.length;
   const r = await ask(alice, 'I spent 12 eur on lunch');
