@@ -1,6 +1,4 @@
-// Sandbox operation run: drives a SIMULATED student account through realistic agent scenarios
-// on an isolated server with a temporary database, and writes the full operation log to sandbox-logs/.
-// No real money, bank or payment system is involved anywhere in StudentFin AI.
+
 // Run: npm run sandbox
 import fs from 'node:fs';
 import path from 'node:path';
@@ -13,7 +11,7 @@ fs.mkdirSync(outDir, { recursive: true });
 
 const ACCOUNT = { name: 'Sandbox Student', email: 'sandbox.student@studentfin.test', password: 'sandbox-pass-2026' };
 
-// Each step: a student request and what the student does with any proposal.
+
 const SCENARIOS = [
   { id: 'S01', title: 'Financial summary (read-only)', say: 'Give me a summary', decide: null },
   { id: 'S02', title: 'Cheapest way to receive the family allowance', say: 'My parents send me 60000 lek every month. What is the cheapest way?', decide: null },
@@ -75,7 +73,7 @@ try {
     }
     step.decisions = decisions;
     const after = await snapshot();
-    const data = x => JSON.stringify({ ...x, agent: undefined }); // settings changes are not financial data
+    const data = x => JSON.stringify({ ...x, agent: undefined }); 
     step.dataChanged = data(before) !== data(after);
     step.delta = { transactions: after.transactions - before.transactions, payments: after.payments - before.payments };
     if (s.lowerLimitTo) await c.put('/api/agent-settings', { enabled: true, maxActionAmount: 300 });
